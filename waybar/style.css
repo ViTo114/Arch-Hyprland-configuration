@@ -1,13 +1,13 @@
 /* Palette Colori - Tema Dark Morbido (Stile Gemini Dark) */
-@define-color bg #1e1f20;          /* Nero/Grigio antracite molto morbido per lo sfondo */
-@define-color fg #e8eaed;          /* Testo grigio chiaro (non bianco puro) per non affaticare la vista */
-@define-color accent #6194A7;      /* Celeste scuro pastello */
-@define-color accent_light #9bc9dd;/* Azzurro chiaro pastello (per il workspace attivo) */
-@define-color alert #f38ba8;       /* Rosso per lo spegnimento/batteria scarica */
-@define-color block_bg #2a2b2f;    /* Grigio scuro per i blocchi hardware e inattivi */
+@define-color bg rgba(30, 31, 32, 1.00);   /* MODIFICATO: Nero/Grigio con trasparenza al 65% per far passare il blur */
+@define-color fg #e8eaed;                  /* Testo grigio chiaro (non bianco puro) per non affaticare la vista */
+@define-color accent #6194A7;              /* Celeste scuro pastello */
+@define-color accent_light #9bc9dd;        /* Azzurro chiaro pastello (per il workspace attivo) */
+@define-color alert #f38ba8;               /* Rosso per lo spegnimento/batteria scarica */
+@define-color block_bg transparent;        /* Grigio scuro per i blocchi hardware e inattivi */
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-family: "Departure Mono", "Font Awesome 6 Free", sans-serif;
     font-size: 13px;
     font-weight: bold;
     border-radius: 0px; /* Rigorosamente squadrato */
@@ -19,6 +19,7 @@
 window#waybar {
     background-color: @bg;
     color: @fg;
+    border-radius: 0px;
 }
 
 .modules-left, .modules-center, .modules-right {
@@ -32,7 +33,7 @@ window#waybar {
     padding: 2px 10px;        
     margin: 3px 2px;          
     background-color: @block_bg; 
-    color: @fg;               
+    color: @fg;                
 }
 
 /* Blocco Workspace corrente (in esecuzione) */
@@ -52,6 +53,12 @@ window#waybar {
 #custom-media {
     color: @accent;
     padding-left: 15px; 
+    padding-right: 1px;
+}
+
+/* Rende la scritta "no media" leggermente più spenta quando inattivo */
+#custom-media.stopped {
+    color: rgba(232, 234, 237, 0.5); /* Usa il grigio base @fg ma con trasparenza al 50% */
 }
 
 /* --- MODULI CENTRALI (Data e Ora) --- */
@@ -81,7 +88,7 @@ window#waybar {
     color: @accent;
     font-size: 18px;
     padding: 0 12px;
-    margin-left: 10px;
+    margin: 3px 2px;
 }
 
 #custom-power {
@@ -89,5 +96,5 @@ window#waybar {
     color: @alert;
     font-size: 18px;
     padding: 0 12px;
-    margin-left: 5px;
+    margin: 3px 2px;
 }
