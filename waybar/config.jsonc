@@ -1,10 +1,10 @@
 {
     "layer": "top",
     "position": "top",
-    "margin-top": 0,
+    "margin-top": 5,
     "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin-left": 300,
+    "margin-right": 300,
     "spacing": 10,
 
     // Disposizione: sinistra (workspaces, media), destra (hardware, power)
@@ -31,7 +31,8 @@
         "format": "󰝚 {}",
         "return-type": "json",
         "max-length": 40,
-        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "interval": 2,
+        "exec": "if playerctl status >/dev/null 2>&1; then playerctl metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}'; else echo '{\"text\": \"no media\", \"tooltip\": \"Nessun media in riproduzione\", \"class\": \"stopped\"}'; fi",
         "on-click": "playerctl play-pause"
     },
 
@@ -59,20 +60,20 @@
     },
     "pulseaudio#microphone": {
         "format": "{format_source}",
-        "format-source": "󰍬 {volume}%",
+        "format-source": "󰍬",
         "format-source-muted": "󰍭 Mute",
         "on-click": "pavucontrol -t 4"
     },
     "network": {
-        "format-wifi": "󰤨  {essid}",
+        "format-wifi": "󰤨 ",
         "format-disconnected": "󰤭  Offline",
         "tooltip-format": "{ifname} via {gwaddr}",
         "on-click": "nm-connection-editor"
     },
     "bluetooth": {
         "format": "󰂯 {status}",
-        "format-connected": "󰂱 {device_alias}",
-        "on-click": "blueman-manager"
+        "format-connected": "󰂱",
+        "on-click": "adw-bluetooth"
     },
     "battery": {
         "format": "{icon} {capacity}%",
